@@ -1,0 +1,11 @@
+{
+  "name": "storycast",
+  "version": "1.0.0",
+  "description": "An all-in-one platform to create, publish, and explore videos and blogs seamlessly",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Anwishta Ghosh",
+  "license": "MIT"
+}
