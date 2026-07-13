@@ -10,12 +10,17 @@ app.use(cors({
 }))
 
 app.use(express.json({ limit: "16kb" }))
-
 app.use(express.urlencoded({ extended: true, limit: "16kb" })) // extended true is used for nested object (in url query parameter 
 //space is converted to %20 this is urlencoded format)
-
 app.use(express.static("public"))
-
 app.use(cookieParser()) // for performing CRUD operation in cookies
+
+
+//routers import 
+import userRouter from './routes/user.route.js'
+
+
+//routes declaration
+app.use("/api/v1/users", userRouter)
 
 export { app };
