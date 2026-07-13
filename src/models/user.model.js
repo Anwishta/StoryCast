@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 const userSchema = new Schema({
     userName: {
-        type: Number,
+        type: String,
         required: true,
         trim: true,
         lowercase: true,
@@ -46,7 +46,7 @@ const userSchema = new Schema({
     }
 }, {timestamps: true})
 
-userSchema.pre('save', async function(){
+userSchema.pre('save', async function(next){
     if(!this.isModified('password')) return next(); //this is to prevent the password field
     // from being modified every time we save some other data i.e password will only be encrypted when we first save it 
     // or edit/change the password
