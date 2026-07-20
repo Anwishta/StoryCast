@@ -69,4 +69,27 @@ const registerUser = asyncHandler( async (req, res) => {
    )
 })
 
-export { registerUser } ;
+const loginUser = asyncHandler( async (req, res) => {
+   const { email, username, password } = req.body;
+
+   if(!email && !username){
+      throw new ApiError(400, "Email or username is required")
+   }
+
+   const user = await User.findOne({
+      $or: [{email}, {username}]
+   })
+
+   if(!user){
+      throw new ApiError(400, "User not found")
+   }
+
+   const accessToken = user.generateAccesToken();
+   const refreshToken = user.generateRefreshToken();
+
+   user.accessToken = accessToken;
+   user.refreshToken = refreshToken;
+   
+})
+
+export { registerUser, loginUser } ;
