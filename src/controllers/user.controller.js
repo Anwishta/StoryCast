@@ -4,7 +4,7 @@ import { User } from "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiSuccess } from "../utils/ApiSuccess.js";
 
-const generateAccessAndRefreshToken = async(userId) => {
+const generateAccessAndRefreshToken = async (userId) => {
    try {
       const user = await User.findById(userId);
       const accessToken = user.generateAccesToken();
@@ -134,4 +134,8 @@ const loginUser = asyncHandler( async (req, res) => {
    
 })
 
-export { registerUser, loginUser } ;
+const logoutUser = asyncHandler( async (req, res) => {
+
+})
+
+export { registerUser, loginUser, logoutUser } ;
