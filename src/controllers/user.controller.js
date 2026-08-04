@@ -230,7 +230,23 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
    const {fullName, email} = req.body
+
+   if(!fullName || !email){
+      throw new ApiError(401, "Both fullName and email required");
+   }
+
+   await User.findByIdAndUpdate(
+      req.user?._id,
+      {
+         $set: {
+            fullName,
+            email: email
+         }
+      },
+      {new : true}
+   ).select("-password");
 })
+
 export { 
    registerUser, 
    loginUser, 
