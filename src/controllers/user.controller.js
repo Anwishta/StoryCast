@@ -270,9 +270,34 @@ const updateAvatar = asyncHandler(async (req, res) => {
       },
       {new: true}
    )
+
    return res
    .status(200)
    .json(new ApiSuccess(200, "Avatar updated successfully"))
+})
+
+const getAccountDetails = asyncHandler(async (req, res) => {
+   const {username} = req.params;
+
+   if(!username?.trim()){
+      throw new ApiError(401, "User not found");
+   }
+
+   const channel = await User.Aggregate[{
+      $match: 
+      {
+         username: usename?.toLowerCase()
+      }
+      , 
+      $lookup: 
+      {
+      from: "subscriptions",
+      localField: "_id",
+      foreignField: "",
+      as: "subscribers"
+      }
+   }]
+
 })
 
 export { 
